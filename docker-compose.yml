@@ -1,0 +1,38 @@
+version: "3.7"
+
+services:
+  app-server:
+    build:
+      context: app-server # Use an image built from the specified dockerfile in the `app-server` directory.
+      dockerfile: Dockerfile
+
+    environment:
+      # APPLICATION
+      - APPLICATION_ENV=Development
+      - OVERRIDE_ON_INIT=Yes
+
+      # DATABASE
+      - DATABASE_URL=mysql:host=db;dbname=dbase
+      - DATABASE_USERNAME=admin
+      - DATABASE_PASSWORD=password
+      - DATABASE_NAME=dbase
+      - DATABASE_HOST=db # When docker-compose executes V2 or Superior files, it will automatically build a network between all of the containers defined in the file, and every container will be immediately able to refer to the others just using the names defined in the docker-compose.yml file.
+
+    depends_on:
+      - db
+    volumes: ["./app-server:/app"]
+    ports:
+      - "85:3000"
+    working_dir: /app/
+    tty: true
+
+  db:
+    image: tutum/mysql
+    ports:
+      - "3309:3306"
+    volumes:
+      - /var/lib/mysql
+    environment:
+      MYSQL_USER: admin
+      MYSQL_PASS: password
+      ON_CREATE_DB: dbase

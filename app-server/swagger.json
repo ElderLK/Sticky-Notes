@@ -1,0 +1,238 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2.0.0",
+    "title": "Tasks Application API V1",
+    "description": "A Application API to CRUD Tasks",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:85",
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "Tasks",
+      "description": "API for tasks in the database"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/tasks": {
+      "get": {
+        "tags": ["Tasks"],
+        "summary": "Get all tasks in database",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Tasks"],
+        "summary": "Create a task",
+        "description": "Create new task in database",
+        "parameters": [
+          {
+            "name": "Task",
+            "in": "body",
+            "description": "Task that we want to create",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          }
+        ],
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "New Task is created",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          }
+        }
+      }
+    },
+
+    "/tasks/{task_id}": {
+      "get": {
+        "tags": ["Task"],
+        "summary": "Get one task with given ID",
+        "parameters": [
+          {
+            "name": "task_id",
+            "in": "path",
+            "description": "The task identification number",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete Task with given ID",
+        "tags": ["Task"],
+        "parameters": [
+          {
+            "name": "task_id",
+            "in": "path",
+            "description": "The task identification number",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Task is deleted",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update Task with give ID",
+        "tags": ["Task"],
+        "parameters": [
+          {
+            "name": "task_id",
+            "in": "path",
+            "description": "The task identification number",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "Task",
+            "in": "body",
+            "description": "Task with new values of properties",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Task is updated",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          }
+        }
+      }
+    },
+
+    "/tasks/{task_id}/restore": {
+      "patch": {
+        "tags": ["Task"],
+        "summary": "Restore one task with given ID",
+        "parameters": [
+          {
+            "name": "task_id",
+            "in": "path",
+            "description": "The task identification number",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Task is updated",
+            "schema": {
+              "$ref": "#/definitions/Task"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ArrayOfUsers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "name": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "description": {
+            "type": "string",
+            "description": "task description"
+          },
+          "status": {
+            "type": "string",
+            "default": "undone",
+            "enum": ["draft", "done", "undone", "deleted", "delayed"],
+            "description": "draft, done, undone, deleted, delayed"
+          },
+          "dueAt": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "example": [
+        {
+          "id": 10,
+          "name": "New api to User"
+        },
+        {
+          "id": 20,
+          "name": "Fix Update Address"
+        }
+      ]
+    },
+    "Task": {
+      "required": ["name", "description", "status", "dueAt"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "uniqueItems": false
+        },
+        "description": {
+          "type": "string",
+          "default": "task description"
+        },
+        "status": {
+          "type": "string",
+          "default": "undone",
+          "enum": ["draft", "done", "undone", "deleted", "delayed"],
+          "description": "draft, done, undone, deleted, delayed"
+        },
+        "dueAt": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    }
+  }
+}
