@@ -20,7 +20,9 @@ services:
 
     depends_on:
       - db
-    volumes: ["./app-server:/app"]
+    volumes: 
+      - ./app-server:/app
+      - /app/node_modules
     ports:
       - "85:3000"
     working_dir: /app/

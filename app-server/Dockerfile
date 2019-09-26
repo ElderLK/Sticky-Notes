@@ -4,9 +4,10 @@ ENV APPLICATION_ENV Production
 ENV OVERRIDE_ON_INIT Yes
 
 RUN apt-get update -y 
+RUN yarn global add nodemon
 
-RUN mkdir -p /app
 WORKDIR /app
-RUN cd /app 
+COPY package.json .
+RUN yarn
 
 CMD [ "yarn", "start" ]
