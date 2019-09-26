@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import api from "../../services/api";
 import "./styles.css";
 
+// criado por www.cursoonline.com
+// proibida reprodução
+// todos os direitos reservados
+
 export default class Task extends Component {
   constructor(props) {
     super(props);
@@ -20,9 +24,10 @@ export default class Task extends Component {
       const { id, name, status, dueAt } = task;
       return (
         <li key={id}>
+          <button className="excluir">X</button>
           <a href="#">
             <h2>{name}</h2>
-            <p>{status}</p>
+            <p>{dueAt}</p>
           </a>
         </li>
       );
