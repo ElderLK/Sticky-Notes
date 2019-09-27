@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 // in latest body-parser use like below.
 app.use(bodyParser.urlencoded({ extended: true }));
-
+app.use(cors);
 app.use(
   "/api-docs",
   swaggerUiExpress.serve,
@@ -20,8 +20,6 @@ app.use(
 app.get("/", (_, res) => {
   res.status(200).send(`This project is alive.`);
 });
-
-app.use(cors);
 
 app.use("/api/v1", task);
 

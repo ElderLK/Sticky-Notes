@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import logo from "../../assets/logo.svg";
 import "./styles.css";
 import api from "../../services/api";
-import Table from "../Table/index";
 import Task from "../Task";
 
 export default class Main extends Component {
@@ -56,7 +55,11 @@ export default class Main extends Component {
             value={this.state.dueAt}
             onChange={this.handleInputChange}
           />
-          <select value={this.state.status} onChange={this.handleInputChange}>
+          <select
+            id="status"
+            value={this.state.status}
+            onChange={this.handleInputChange}
+          >
             <option value="draft">draft</option>
             <option value="done">done</option>
             <option value="undone">undone</option>

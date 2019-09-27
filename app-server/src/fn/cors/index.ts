@@ -11,6 +11,10 @@ export default function middleware(
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, DELETE, PATCH"
+  );
+  res.setHeader(
     "Access-Control-Expose-Headers",
     "AMP-Access-Control-Allow-Source-Origin, AMP-Redirect-To, AMP-Same-Origin"
   );

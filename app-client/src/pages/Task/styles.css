@@ -38,12 +38,13 @@ ul li h2 {
 }
 ul li p {
   font-family: "Reenie Beanie", arial, sans-serif;
-  font-size: 180%;
+  font-size: 80%;
 }
 ul li {
   -webkit-transform: rotate(-6deg);
   -o-transform: rotate(-6deg);
   -moz-transform: rotate(-6deg);
+  min-width: 200px;
 }
 ul li:nth-child(even) {
   -o-transform: rotate(4deg);
@@ -90,22 +91,21 @@ ol li a {
   color: #fff;
 }
 
-
-form{
+form {
   margin: auto;
 }
 
-#main-container{
+#main-container {
   display: inline-block;
   margin: auto;
   max-width: 1000px;
 }
 
-#root{
+#root {
   text-align: center;
 }
 
-button.excluir{
+button.excluir {
   border: 0;
   background: red;
   color: white;
@@ -116,4 +116,21 @@ button.excluir{
   left: -7px;
   font-weight: 700;
   cursor: pointer;
+}
+
+button.desfazer {
+  border: 0;
+  background: green;
+  color: white;
+  padding: 5px 7px;
+  border-radius: 100px;
+  position: absolute;
+  top: -7px;
+  left: -7px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+p {
+  padding: 5px;
 }

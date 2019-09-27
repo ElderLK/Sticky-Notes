@@ -1,6 +1,26 @@
 version: "3.7"
 
 services:
+  app-client:
+    build:
+      context: app-client # Use an image built from the specified dockerfile in the `app-server` directory.
+      dockerfile: Dockerfile
+
+    environment:
+      # APPLICATION
+      - APPLICATION_ENV=Development
+      - OVERRIDE_ON_INIT=Yes
+
+    depends_on:
+      - app-server
+    volumes:
+      - ./app-client:/app
+      - /app/node_modules
+    ports:
+      - "8080:3000"
+    working_dir: /app/
+    tty: true
+
   app-server:
     build:
       context: app-server # Use an image built from the specified dockerfile in the `app-server` directory.
@@ -20,7 +40,7 @@ services:
 
     depends_on:
       - db
-    volumes: 
+    volumes:
       - ./app-server:/app
       - /app/node_modules
     ports:

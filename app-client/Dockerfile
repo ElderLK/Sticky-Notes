@@ -1,13 +1,12 @@
-# base image
-FROM node:12.2.0-alpine
+FROM node:11
 
 ENV APPLICATION_ENV Production
 ENV OVERRIDE_ON_INIT Yes
 
 RUN apt-get update -y 
 
-RUN mkdir -p /app
 WORKDIR /app
-RUN cd /app 
+COPY package.json .
+RUN yarn
 
 CMD [ "yarn", "start" ]

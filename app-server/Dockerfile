@@ -8,6 +8,7 @@ RUN yarn global add nodemon
 
 WORKDIR /app
 COPY package.json .
+COPY swagger.json .
 RUN yarn
 
 CMD [ "yarn", "start" ]
